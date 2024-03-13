@@ -40,3 +40,10 @@
 .read-the-docs {
   color: #888;
 }
+
+
+img {
+  image-rendering: pixelated;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
