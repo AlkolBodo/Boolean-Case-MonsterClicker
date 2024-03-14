@@ -13,11 +13,14 @@ function App() {
   const [kills, setKills] = useState(0);
   const [health, setHealth] = useState(0)
   const [chance, setChance] = useState(0)
-  const elem = document.getElementById("myBar");
   const maxHealth = 10;
   useEffect(()=>{
     setHealth(maxHealth)
   },[]);
+
+  const monsters = [
+    "https://raw.githubusercontent.com/AlkolBodo/Boolean-Case-MonsterClicker-frontend/main/src/assets/Mysterious%20Bread.png"
+  ]
 
   useEffect(()=>{
     console.log("CHANCE",chance)
@@ -51,7 +54,7 @@ function App() {
       <div>
         <img
           className="icon"
-          src={Finger}
+          src={[monsters[0]]}
           alt="Mystery Bread"
           width="100%"
           height="100%"
