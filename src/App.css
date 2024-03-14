@@ -47,3 +47,26 @@ img {
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
 }
+
+#myProgress {
+  width: 100%;
+  background-color: #ddd;
+}
+
+#myBar {
+  width: 100%;
+  height: 30px;
+  background-color: #04AA6D;
+  /* display: flex;
+  justify-content: left;
+  align-items: center; */
+}
+
+.healthText{
+  /* position: absolute;
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); */
+ /* justify-content: left; */
+}
