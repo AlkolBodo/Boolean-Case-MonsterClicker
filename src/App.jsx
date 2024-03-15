@@ -1,71 +1,32 @@
-import { useState, useEffect } from "react";
-import MBread from "./assets/Mysterious Bread.png";
-import Quartz from "./assets/Spicy Quartz Sunflower.png";
-import Finger from "./assets/Dark Finger.png";
+import { useState, createContext, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import MonsterComponent from "./components/MonsterComponent";
+export const TempContext = createContext();
 
-const delay = ms => new Promise(
-  resolve => setTimeout(resolve, ms)
-);
 
 function App() {
   const [count, setCount] = useState(0);
   const [kills, setKills] = useState(0);
-  const [health, setHealth] = useState(0)
-  const [chance, setChance] = useState(0)
-  const maxHealth = 10;
-  useEffect(()=>{
-    setHealth(maxHealth)
-  },[]);
 
-  const monsters = [
-    "https://raw.githubusercontent.com/AlkolBodo/Boolean-Case-MonsterClicker-frontend/main/src/assets/Mysterious%20Bread.png"
-  ]
+  const [chance, setChance] = useState(0);
 
-  useEffect(()=>{
-    console.log("CHANCE",chance)
-  },[chance])
-  async function clickingHim(){
-    setCount((count) => count + 1)
-    setChance(Math.floor(Math.random() * 10))
-    // elem.style.width = (width - (count*10)) + "%";
-    if (health > 1) {
-      setHealth(health-1)
-    }
-    else if (health ===1 ){
-      setHealth(0)
-      setKills((kills) => kills + 1)
-      await delay(1000);
-        setHealth(maxHealth)
-    }
-    console.log(health)
-  }
+  // useEffect(()=>{
+  //   console.log("CHANCE",chance)
+  // },[chance])
 
   return (
     <>
-      <div id="myProgress">
-        <div id="myBar" style={{ width: ((health)/maxHealth)*100 + "%"}}>
-          <p className="healthText">
-
-          {health}
-          </p>
+      <TempContext.Provider value={{setCount: setCount, setKills: setKills, setChance: setChance}}>
+        <h1>{chance > 8 ? "CUCK" : "CLICK"} HIM</h1>
+        <div className="card">
+          <Routes>
+            <Route path="/" element={<MonsterComponent />} />
+          </Routes>
+          <button>count is {count}</button>
+          <button>kills are {kills}</button>
         </div>
-      </div>
-      <div>
-        <img
-          className="icon"
-          src={[monsters[0]]}
-          alt="Mystery Bread"
-          width="100%"
-          height="100%"
-          onClick={() => clickingHim()}
-        />
-      </div>
-      <h1>{chance > 8 ? "CUCK" : "CLICK"} HIM</h1>
-      <div className="card">
-        <button>count is {count}</button>
-        <button>kills are {kills}</button>
-      </div>
+      </TempContext.Provider>
     </>
   );
 }
