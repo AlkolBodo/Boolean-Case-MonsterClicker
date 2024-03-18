@@ -23,6 +23,14 @@ function App() {
     sprite: "",
     currentHP: 0,
   });
+  const click = new Audio();
+  click.setAttribute('src', "../assets/select-sound-121244.mp3")
+
+
+  function playClick(){
+    console.log(click)
+    click.play()
+  }
 
   const [chance, setChance] = useState(0);
 
@@ -51,6 +59,7 @@ function App() {
             setCount: setCount,
             setKills: setKills,
             setChance: setChance,
+            playClick:playClick,
           }}
         >
           <NavigateContext.Provider
@@ -64,7 +73,7 @@ function App() {
             <MonsterContext.Provider
               value={{
                 currentMonster: currentMonster,
-                setCurrentMonster: setCurrentMonster,
+                setCurrentMonster: setCurrentMonster, 
               }}
             >
               <Routes>

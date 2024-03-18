@@ -8,11 +8,11 @@ import PropTypes from 'prop-types';
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function MonsterComponent({ currentMonster, spawnMonster}) {
-  const { setCount, setKills, setChance } = useContext(TempContext);
+  const { setCount, setKills, setChance, playClick } = useContext(TempContext);
   const [health, setHealth] = useState(0);
   const [rand, setRand] = useState(0);
   const maxHealth = currentMonster.HP;
-
+  const alive = true
 
 
   // const [monsterList, setMonsterList] = useState(monsters);
@@ -68,12 +68,15 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
       </div>
       <div className="monsterBox">
           <img
-            className="icon"
+            className={`icon ${currentMonster.currentHP>0 ? "alive" : "dead"}`}
             src={[currentMonster.sprite]}
             alt="Mystery Bread"
             width="100%"
             height="100%"
-            onClick={() => clickingHim()}
+            onClick={() => {
+              clickingHim()
+              playClick()
+            }}
           />
       </div>
     </div>

@@ -45,5 +45,36 @@
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
+
+
+        
     }
+}
+
+.monsterBox:active{
+    transform: scale(0.9) rotate(10deg);
+}
+
+.alive{
+    animation-name: idle;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        
+        animation-direction: alternate;
+}
+
+@keyframes idle {
+    0%   {transform: translate(0px, 10px)}
+    100%   {transform: scale(1.05) translate(0px, 0px)}
+}
+
+.dead {
+    animation-name: test;
+    animation-duration: 6s;
+}
+
+@keyframes test {
+    0%   {transform: rotate(0deg);}
+    10%   {transform: rotate(90deg);}
+    100%   {transform: rotate(90deg);}
 }
