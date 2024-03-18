@@ -1,70 +1,89 @@
-import { useState, useEffect } from "react";
-import MBread from "./assets/Mysterious Bread.png";
-import Quartz from "./assets/Spicy Quartz Sunflower.png";
-import Finger from "./assets/Dark Finger.png";
+import { useState, createContext, useEffect } from "react";
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
+import MonsterComponent from "./components/MonsterComponent";
+import Beastiary from "./components/Beastiary";
+import Header from "./components/Header";
+import LeftMenu from "./components/LeftMenu";
+import monsters from "./data/monsters";
 
-const delay = ms => new Promise(
-  resolve => setTimeout(resolve, ms)
-);
+export const NavigateContext = createContext();
+export const TempContext = createContext();
+export const MonsterContext = createContext();
 
 function App() {
+  const [currentTab, setCurrentTab] = useState("home");
   const [count, setCount] = useState(0);
   const [kills, setKills] = useState(0);
-  const [health, setHealth] = useState(0)
-  const [chance, setChance] = useState(0)
-  const maxHealth = 10;
-  useEffect(()=>{
-    setHealth(maxHealth)
-  },[]);
+  const [currentMonster, setCurrentMonster] = useState({
+    id: 2,
+    name: "",
+    HP: 0,
+    randomHp: 0,
+    sprite: "",
+    currentHP: 0,
+  });
 
-  const monsters = [
-    "https://raw.githubusercontent.com/AlkolBodo/Boolean-Case-MonsterClicker-frontend/main/src/assets/Mysterious%20Bread.png"
-  ]
+  const [chance, setChance] = useState(0);
 
-  useEffect(()=>{
-    console.log("CHANCE",chance)
-  },[chance])
-  async function clickingHim(){
-    setCount((count) => count + 1)
-    setChance(Math.floor(Math.random() * 10))
-    // elem.style.width = (width - (count*10)) + "%";
-    if (health > 1) {
-      setHealth(health-1)
-    }
-    else if (health ===1 ){
-      setHealth(0)
-      setKills((kills) => kills + 1)
-      await delay(1000);
-        setHealth(maxHealth)
-    }
-    console.log(health)
+  let newMonster;
+  useEffect(() => {
+    spawnMonster()
+  }, []);
+  function spawnMonster(){
+    newMonster = structuredClone(monsters[Math.floor(Math.random() * monsters.length)]);
+    newMonster.HP =
+      newMonster.HP + Math.floor(Math.random() * newMonster.randomHp);
+    newMonster.currentHP = newMonster.HP;
+    // console.log(newMonster.sprite);
+    console.log(monsters)
+    setCurrentMonster(newMonster);
   }
+  // useEffect(()=>{
+  //   console.log("CHANCE",chance)
+  // },[chance])
 
   return (
     <>
-      <div id="myProgress">
-        <div id="myBar" style={{ width: ((health)/maxHealth)*100 + "%"}}>
-          <p className="healthText">
-
-          {health}
-          </p>
-        </div>
-      </div>
-      <div>
-        <img
-          className="icon"
-          src={[monsters[0]]}
-          alt="Mystery Bread"
-          width="100%"
-          height="100%"
-          onClick={() => clickingHim()}
-        />
-      </div>
-      <h1>{chance > 8 ? "CUCK" : "CLICK"} HIM</h1>
-      <div className="card">
-        <button>count is {count}</button>
-        <button>kills are {kills}</button>
+      <div className="app">
+        <TempContext.Provider
+          value={{
+            setCount: setCount,
+            setKills: setKills,
+            setChance: setChance,
+          }}
+        >
+          <NavigateContext.Provider
+            value={{ currentTab: currentTab, setCurrentTab: setCurrentTab }}
+          >
+            <Header />
+            <LeftMenu />
+          </NavigateContext.Provider>
+          {/* <h1>{chance > 8 ? "CLICK" : "CLICK"} HIM</h1> */}
+          <div className="page">
+            <MonsterContext.Provider
+              value={{
+                currentMonster: currentMonster,
+                setCurrentMonster: setCurrentMonster,
+              }}
+            >
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <MonsterComponent
+                      spawnMonster={spawnMonster}
+                      currentMonster={currentMonster}
+                    />
+                  }
+                />
+                <Route path="/beastiary" element={<Beastiary />} />
+              </Routes>
+            </MonsterContext.Provider>
+            <button>count is {count}</button>
+            <button>kills are {kills}</button>
+          </div>
+        </TempContext.Provider>
       </div>
     </>
   );

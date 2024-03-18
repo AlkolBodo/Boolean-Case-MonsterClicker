@@ -1,0 +1,49 @@
+.MonsterPage{
+    padding: 10px 0;
+    width: 60%;
+    display: grid;
+    justify-items: center;
+    background-color: green;
+}
+
+.myProgress {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+    width: 250px;
+    background-color: #ddd;
+}
+
+#myBar {
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 30px;
+    background-color: red;
+}
+
+.monsterBox{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+    width: 200px;
+    img {
+        width: 100%;
+        height: auto;
+        display: block;
+        image-rendering: pixelated;
+        image-rendering: -moz-crisp-edges;
+        image-rendering: crisp-edges;
+        /* object-fit:cover; */
+        user-select: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
+}
