@@ -21,14 +21,36 @@ function LeftMenu() {
           </div>
         </li>
         <li
-          className={`item ${currentTab === "profile" ? "active" : ""}`}
+          className={`item ${currentTab === "upgrades" ? "active" : ""}`}
           onClick={() => {
-            setCurrentTab("profile");
-            navigate("/beastiary");
+            setCurrentTab("upgrades");
+            navigate("/upgrades");
           }}
         >
           <div className="menu--item">
-            <span className="label">Beastiary</span>
+            <span className="label">Upgrades</span>
+          </div>
+        </li>
+        <li
+          className={`item ${currentTab === "bestiary" ? "active" : ""}`}
+          onClick={() => {
+            setCurrentTab("bestiary");
+            navigate("/bestiary");
+          }}
+        >
+          <div className="menu--item">
+            <span className="label">Bestiary</span>
+          </div>
+        </li>
+        <li
+          className={`item ${currentTab === "stats" ? "active" : ""}`}
+          onClick={() => {
+            setCurrentTab("stats");
+            navigate("/stats");
+          }}
+        >
+          <div className="menu--item">
+            <span className="label">Statistics</span>
           </div>
         </li>
       </ul>

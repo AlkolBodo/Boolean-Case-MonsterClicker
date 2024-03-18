@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function MonsterComponent({ currentMonster, spawnMonster}) {
-  const { setCount, setKills, setChance, playClick } = useContext(TempContext);
+  const { setCount, setKills, setChance, playClick, playDeath } = useContext(TempContext);
   const [health, setHealth] = useState(0);
   const [rand, setRand] = useState(0);
   const maxHealth = currentMonster.HP;
@@ -45,13 +45,15 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
     // elem.style.width = (width - (count*10)) + "%";
     if (currentMonster.currentHP > 1) {
       currentMonster.currentHP-=1
+      playClick()
       // setHealth(health - 1);
     } else if (currentMonster.currentHP === 1) {
       console.log("dead")
       currentMonster.currentHP = 0
       // setHealth(0);
       setKills((kills) => kills + 1);
-      await delay(1000);
+      playDeath()
+      await delay(1500);
       spawnMonster()
       // setRand(Math.floor(Math.random() * 3));
       // setHealth(maxHealth);
@@ -75,7 +77,6 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
             height="100%"
             onClick={() => {
               clickingHim()
-              playClick()
             }}
           />
       </div>
