@@ -1,9 +1,9 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
-}
+} */
 
 .logo {
   height: 6em;
@@ -34,7 +34,14 @@
 }
 
 .card {
+  /* display: flex; */
   padding: 2em;
+}
+.app > .page {
+  background-color: aqua;
+  grid-area: page;
+  /* padding: 2em; */
+  margin: 10px;
 }
 
 .read-the-docs {
@@ -42,25 +49,7 @@
 }
 
 
-img {
-  image-rendering: pixelated;
-  image-rendering: -moz-crisp-edges;
-  image-rendering: crisp-edges;
-}
 
-#myProgress {
-  width: 100%;
-  background-color: #ddd;
-}
-
-#myBar {
-  width: 100%;
-  height: 30px;
-  background-color: #04AA6D;
-  /* display: flex;
-  justify-content: left;
-  align-items: center; */
-}
 
 .healthText{
   /* position: absolute;
@@ -69,4 +58,68 @@ img {
   left: 50%;
   transform: translate(-50%, -50%); */
  /* justify-content: left; */
+}
+
+
+
+.app {
+  /* background-color: #F0F5FA; */
+  display: grid;
+  grid-template:
+  'header header' 90px
+  'left-menu page' 1fr /
+  120px 1fr;
+}
+
+.app > .page {
+  grid-area: page;
+  padding: 10px 0;
+  width: 90%;
+  display: grid;
+  justify-items: center;
+  place-self: center;
+}
+
+.app > .left-menu {
+  /* background-color: white; */
+  grid-area: left-menu;
+  place-self: left;
+}
+
+.app > .left-menu > li{
+  justify-content: center;
+}
+
+.app > .left-menu .inbox-list {
+  display: grid;
+  grid-gap: 10px;
+  top: 90px;
+  position: sticky;
+}
+
+.app > .left-menu .inbox-list .item {
+  height: 120px;
+  padding: 5px 10px;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.menu--item{
+  display: flex;
+  flex-flow: column;
+  height: 100px;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.app > .left-menu .inbox-list .item.active {
+  background-color: #e6ebf5;
+  color: #000046;
+}
+
+.app > .left-menu .inbox-list .item.toggle {
+  background-color: transparent;
 }
