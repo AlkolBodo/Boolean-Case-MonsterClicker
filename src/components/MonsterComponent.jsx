@@ -4,10 +4,16 @@ import { TempContext } from "../App";
 import "../styles/monster.css";
 // import monsters from './../data/monsters'
 import PropTypes from 'prop-types';
+import { StatisticContext } from "../App";
+
+
+
+
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function MonsterComponent({ currentMonster, spawnMonster}) {
+  const { inventory, setInventory } = useContext(StatisticContext);
   const { setCount, setKills, setChance, playClick, playDeath } = useContext(TempContext);
   const [health, setHealth] = useState(0);
   const [rand, setRand] = useState(0);
@@ -54,6 +60,9 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
       setKills((kills) => kills + 1);
       playDeath()
       await delay(1500);
+
+      setInventory({gold: inventory.gold+1})
+
       spawnMonster()
       // setRand(Math.floor(Math.random() * 3));
       // setHealth(maxHealth);

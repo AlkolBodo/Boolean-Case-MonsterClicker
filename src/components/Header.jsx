@@ -1,12 +1,17 @@
 import React from 'react'
-import { useState, createContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "../styles/Header.css";
+import { StatisticContext } from "../App";
+
+
 
 
 function Header() {
+  const { inventory } = useContext(StatisticContext);
   return (
     <header className='header'>Header
+    <p>Gold: {inventory.gold} </p>
     <Routes>
                   <Route
                     path="/"
