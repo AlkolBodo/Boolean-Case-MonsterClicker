@@ -118,6 +118,18 @@ function App() {
           </TempContext.Provider>
         </StatisticContext.Provider>
       </div>
+      <svg className="none">
+        <filter id="wavy2">
+          <feTurbulence
+            x="0"
+            y="0"
+            baseFrequency="0.02"
+            numOctaves="5"
+            seed="12"
+          ></feTurbulence>
+          <feDisplacementMap in="SourceGraphic" scale="20" />
+        </filter>
+      </svg>
     </>
   );
 }

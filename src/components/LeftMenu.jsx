@@ -10,12 +10,14 @@ function LeftMenu() {
     <nav className="left-menu">
       <ul className="inbox-list">
         <li
+          
           className={`item ${currentTab === "home" ? "active" : ""}`}
           onClick={() => {
             setCurrentTab("home");
             navigate("/");
           }}
         >
+          <div className={`parchment ${currentTab === "home" ? "active" : ""}`}></div>
           <div className="menu--item">
             <span className="label">Home</span>
           </div>
@@ -27,6 +29,7 @@ function LeftMenu() {
             navigate("/upgrades");
           }}
         >
+          <div className={`parchment ${currentTab === "upgrades" ? "active" : ""}`}></div>
           <div className="menu--item">
             <span className="label">Upgrades</span>
           </div>
@@ -38,6 +41,7 @@ function LeftMenu() {
             navigate("/bestiary");
           }}
         >
+          <div className={`parchment ${currentTab === "bestiary" ? "active" : ""}`}></div>
           <div className="menu--item">
             <span className="label">Bestiary</span>
           </div>
@@ -49,6 +53,7 @@ function LeftMenu() {
             navigate("/stats");
           }}
         >
+          <div className={`parchment ${currentTab === "stats" ? "active" : ""}`}></div>
           <div className="menu--item">
             <span className="label">Statistics</span>
           </div>
