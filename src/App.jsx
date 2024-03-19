@@ -2,7 +2,7 @@ import { useState, createContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import MonsterComponent from "./components/MonsterComponent";
-import Beastiary from "./components/Beastiary";
+import Bestiary from "./components/Bestiary";
 import Header from "./components/Header";
 import LeftMenu from "./components/LeftMenu";
 import monsters from "./data/monsters";
@@ -110,7 +110,7 @@ function App() {
                     }
                   />
                   <Route path="/upgrades" element={<Upgrades />} />
-                  <Route path="/bestiary" element={<Beastiary />} />
+                  <Route path="/bestiary" element={<Bestiary />} />
                   <Route path="/stats" element={<Statistics />} />
                 </Routes>
               </MonsterContext.Provider>

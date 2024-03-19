@@ -1,0 +1,31 @@
+.bestiary{
+    height: 100%;
+    /* padding: 10px 0; */
+    width: 60%;
+    /* display: grid; */
+    /* justify-items: center; */
+    background-color: green;
+    ul{
+        list-style-type: none;
+    }
+}
+
+.mlist{
+    background-color: red;
+    display: grid;
+    grid-template-columns: repeat(4, 125px);
+    grid-gap: 1rem;
+    justify-content: center;
+    img{
+        width: 100%;
+        height: auto;
+        display: block;
+        image-rendering: pixelated;
+    }
+    .content{
+        background-color: purple;
+        display: grid;
+        grid-template-rows: 2, 125px;
+        text-align: center;
+    }
+}
