@@ -43,8 +43,8 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
   // ];
 
   async function clickingHim() {
-    console.log("current hp", currentMonster.currentHP)
-    console.log("hp", health)
+    // console.log("current hp", currentMonster.currentHP)
+    // console.log("hp", health)
 
     setCount((count) => count + 1);
     // setChance(Math.floor(Math.random() * 10));
@@ -54,15 +54,23 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
       playClick()
       // setHealth(health - 1);
     } else if (currentMonster.currentHP === 1) {
-      console.log("dead")
+      // console.log("dead")
       currentMonster.currentHP = 0
       // setHealth(0);
       setKills((kills) => kills + 1);
       playDeath()
       await delay(1500);
 
-      setInventory({gold: inventory.gold+1})
-
+      // setInventory({gold: inventory.gold+1})
+      const tempInv = inventory
+      tempInv["gold"] +=1 
+      Object.keys(currentMonster.items).forEach((key) => {
+        const item = currentMonster.items[key];
+        tempInv[item.name] += item.amount
+        // console.log(item.name, item.amount)
+      });
+      setInventory(tempInv)
+      // console.log(inventory)
       spawnMonster()
       // setRand(Math.floor(Math.random() * 3));
       // setHealth(maxHealth);

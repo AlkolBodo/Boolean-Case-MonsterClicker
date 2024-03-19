@@ -30,7 +30,8 @@ function App() {
     gold: 0,
     blob: 0,
     bone: 0,
-    happiness: 0
+    happiness: 0,
+    bread: 0,
   });
   const clickSound = new Audio();
   clickSound.setAttribute(
