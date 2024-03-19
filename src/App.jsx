@@ -26,16 +26,23 @@ function App() {
     sprite: "",
     currentHP: 0,
   });
+  const [inventory, setInventory] = useState({
+    gold: 0,
+    blob: 0,
+    bone: 0,
+    happiness: 0,
+    bread: 0,
+  });
   const clickSound = new Audio();
   clickSound.setAttribute(
     "src",
-    "https://github.com/AlkolBodo/Boolean-Case-MonsterClicker-frontend/raw/juice/src/assets/select-sound-121244.mp3"
+    "https://github.com/AlkolBodo/Boolean-Case-MonsterClicker-frontend/raw/main/src/assets/select-sound-121244.mp3"
   );
   clickSound.volume = 0.5;
   const deathSound = new Audio();
   deathSound.setAttribute(
     "src",
-    "https://github.com/AlkolBodo/Boolean-Case-MonsterClicker-frontend/raw/juice/src/assets/bouncy-sound-81173.mp3"
+    "https://github.com/AlkolBodo/Boolean-Case-MonsterClicker-frontend/raw/main/src/assets/bouncy-sound-81173.mp3"
   );
   deathSound.volume = 0.5;
 
@@ -74,6 +81,8 @@ function App() {
           value={{
             count: count,
             kills: kills,
+            inventory: inventory,
+            setInventory: setInventory
           }}
         >
           <TempContext.Provider

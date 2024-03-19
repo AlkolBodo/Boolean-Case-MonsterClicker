@@ -4,10 +4,16 @@ import { TempContext } from "../App";
 import "../styles/monster.css";
 // import monsters from './../data/monsters'
 import PropTypes from 'prop-types';
+import { StatisticContext } from "../App";
+
+
+
+
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function MonsterComponent({ currentMonster, spawnMonster}) {
+  const { inventory, setInventory } = useContext(StatisticContext);
   const { setCount, setKills, setChance, playClick, playDeath } = useContext(TempContext);
   const [health, setHealth] = useState(0);
   const [rand, setRand] = useState(0);
@@ -37,8 +43,8 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
   // ];
 
   async function clickingHim() {
-    console.log("current hp", currentMonster.currentHP)
-    console.log("hp", health)
+    // console.log("current hp", currentMonster.currentHP)
+    // console.log("hp", health)
 
     setCount((count) => count + 1);
     // setChance(Math.floor(Math.random() * 10));
@@ -48,12 +54,23 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
       playClick()
       // setHealth(health - 1);
     } else if (currentMonster.currentHP === 1) {
-      console.log("dead")
+      // console.log("dead")
       currentMonster.currentHP = 0
       // setHealth(0);
       setKills((kills) => kills + 1);
       playDeath()
       await delay(1500);
+
+      // setInventory({gold: inventory.gold+1})
+      const tempInv = inventory
+      tempInv["gold"] +=1 
+      Object.keys(currentMonster.items).forEach((key) => {
+        const item = currentMonster.items[key];
+        tempInv[item.name] += item.amount
+        // console.log(item.name, item.amount)
+      });
+      setInventory(tempInv)
+      // console.log(inventory)
       spawnMonster()
       // setRand(Math.floor(Math.random() * 3));
       // setHealth(maxHealth);
