@@ -10,25 +10,52 @@ function LeftMenu() {
     <nav className="left-menu">
       <ul className="inbox-list">
         <li
+          
           className={`item ${currentTab === "home" ? "active" : ""}`}
           onClick={() => {
             setCurrentTab("home");
             navigate("/");
           }}
         >
+          <div className={`parchment ${currentTab === "home" ? "active" : ""}`}></div>
           <div className="menu--item">
             <span className="label">Home</span>
           </div>
         </li>
         <li
-          className={`item ${currentTab === "profile" ? "active" : ""}`}
+          className={`item ${currentTab === "upgrades" ? "active" : ""}`}
           onClick={() => {
-            setCurrentTab("profile");
-            navigate("/beastiary");
+            setCurrentTab("upgrades");
+            navigate("/upgrades");
           }}
         >
+          <div className={`parchment ${currentTab === "upgrades" ? "active" : ""}`}></div>
           <div className="menu--item">
-            <span className="label">Beastiary</span>
+            <span className="label">Upgrades</span>
+          </div>
+        </li>
+        <li
+          className={`item ${currentTab === "bestiary" ? "active" : ""}`}
+          onClick={() => {
+            setCurrentTab("bestiary");
+            navigate("/bestiary");
+          }}
+        >
+          <div className={`parchment ${currentTab === "bestiary" ? "active" : ""}`}></div>
+          <div className="menu--item">
+            <span className="label">Bestiary</span>
+          </div>
+        </li>
+        <li
+          className={`item ${currentTab === "stats" ? "active" : ""}`}
+          onClick={() => {
+            setCurrentTab("stats");
+            navigate("/stats");
+          }}
+        >
+          <div className={`parchment ${currentTab === "stats" ? "active" : ""}`}></div>
+          <div className="menu--item">
+            <span className="label">Statistics</span>
           </div>
         </li>
       </ul>

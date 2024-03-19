@@ -1,5 +1,6 @@
 .MonsterPage{
-    padding: 10px 0;
+    height: 100%;
+    /* padding: 10px 0; */
     width: 60%;
     display: grid;
     justify-items: center;
@@ -7,10 +8,12 @@
 }
 
 .myProgress {
+    place-self: center;
+    height: 30px;
     border-radius: 10px;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
+    justify-content: flex-start;
     width: 250px;
     background-color: #ddd;
 }
@@ -20,7 +23,7 @@
     display: flex;
     align-items: center;
     width: 100%;
-    height: 30px;
+    height: 100%;
     background-color: red;
 }
 
@@ -45,5 +48,41 @@
         -moz-user-select: none;
         -webkit-user-select: none;
         -ms-user-select: none;
+
+
+        
     }
+}
+
+.monsterBox:active{
+    transform: scale(0.9) rotate(10deg);
+}
+
+.alive{
+    animation-name: idle;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        
+        animation-direction: alternate;
+}
+
+@keyframes idle {
+    0%   {transform: translate(0px, 10px)}
+    100%   {transform: scale(1.05) translate(0px, 0px)}
+}
+
+.dead {
+    animation-name: test;
+    animation-duration: 1.6s;
+}
+
+@keyframes death {
+    0%   {transform: rotate(0deg);}
+    10%   {transform: rotate(90deg);}
+    100%   {transform: rotate(90deg);}
+}
+
+@keyframes test {
+    0%   {transform: rotate(0deg);}
+    100%   {transform: rotate(720deg) scale(0.05);}
 }

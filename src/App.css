@@ -37,29 +37,10 @@
   /* display: flex; */
   padding: 2em;
 }
-.app > .page {
-  background-color: aqua;
-  grid-area: page;
-  /* padding: 2em; */
-  margin: 10px;
-}
 
 .read-the-docs {
   color: #888;
 }
-
-
-
-
-.healthText{
-  /* position: absolute;
-  z-index: -1;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%); */
- /* justify-content: left; */
-}
-
 
 
 .app {
@@ -72,18 +53,25 @@
 }
 
 .app > .page {
+  height: 100%;
   grid-area: page;
-  padding: 10px 0;
-  width: 90%;
+  /* padding: 10px 0; */
+  width: 100%;
   display: grid;
   justify-items: center;
   place-self: center;
+  background-color: aqua;
+    /* grid-area: page; */
+  /* padding: 2em; */
+  margin: 10px;
+  overflow: hidden;
 }
 
 .app > .left-menu {
   /* background-color: white; */
   grid-area: left-menu;
   place-self: left;
+  height: 100%;
 }
 
 .app > .left-menu > li{
@@ -95,18 +83,23 @@
   grid-gap: 10px;
   top: 90px;
   position: sticky;
+  padding: 0;
 }
 
 .app > .left-menu .inbox-list .item {
+  position: relative;
   height: 120px;
   padding: 5px 10px;
   display: grid;
   justify-content: center;
   align-items: center;
-
+  
+  color: #000046;
+  
 }
 
 .menu--item{
+  position: relative;
   display: flex;
   flex-flow: column;
   height: 100px;
@@ -116,10 +109,34 @@
 }
 
 .app > .left-menu .inbox-list .item.active {
-  background-color: #e6ebf5;
+  /* background-color: #e6ebf5; */
+  /* background-color:  rgb(241, 233, 210); */
   color: #000046;
+  /* border: dashed;
+  border-color:red; */
 }
 
-.app > .left-menu .inbox-list .item.toggle {
-  background-color: transparent;
+.parchment {
+  position: absolute;
+  height: 120px;
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+
+  color: #000046;
+  /* border: dashed;
+  border-color:black; */
+  box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset;
+  background: #fffef0;
+  filter: url(#wavy2);
+}
+
+.parchment.active{
+  box-shadow: 0px 3px 30px orangered, 0 0 60px #8a4d0f inset;
+  background: #ffffff;
+}
+
+.none{
+  display: none;
 }
