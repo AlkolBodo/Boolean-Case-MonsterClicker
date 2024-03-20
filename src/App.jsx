@@ -18,6 +18,16 @@ function App() {
   const [currentTab, setCurrentTab] = useState("home");
   const [count, setCount] = useState(0);
   const [kills, setKills] = useState(0);
+  const [test, setTest] = useState({
+    monsterName: "",
+    monsterSpriteUrl: "",
+    baseHealth: 0,
+    extraHealth: 0,
+    goldDrop: 0,
+    location: 0,
+    currentHP: 0,
+    items: [],
+  });
   const [currentMonster, setCurrentMonster] = useState({
     id: 2,
     name: "",
@@ -27,11 +37,11 @@ function App() {
     currentHP: 0,
   });
   const [inventory, setInventory] = useState({
-    gold: 0,
-    blob: 0,
-    bone: 0,
-    happiness: 0,
-    bread: 0,
+    Gold: 0,
+    Blob: 0,
+    Bone: 0,
+    Scrap: 0,
+    "Spirit energy": 0,
   });
   const clickSound = new Audio();
   clickSound.setAttribute(
@@ -52,13 +62,35 @@ function App() {
   function playDeath() {
     deathSound.play();
   }
-
   const [chance, setChance] = useState(0);
+
+  // https://localhost:7249/monsters
+  const [monsterData, setMonsterData] = useState([]);
+  const URL = "https://localhost:7249/monsters/stage/1";
+  function getData() {
+    fetch(URL)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => setMonsterData(data.data));
+  }
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    console.log(monsterData);
+    if(monsterData.length > 0 ){
+      spawnMonster2()
+      console.log(currentMonster)
+    }
+  }, [monsterData]);
 
   let newMonster;
   useEffect(() => {
-    spawnMonster();
+    // spawnMonster();
   }, []);
+
   function spawnMonster() {
     newMonster = structuredClone(
       monsters[Math.floor(Math.random() * monsters.length)]
@@ -67,8 +99,20 @@ function App() {
       newMonster.HP + Math.floor(Math.random() * newMonster.randomHp);
     newMonster.currentHP = newMonster.HP;
     // console.log(newMonster.sprite);
-    console.log(monsters);
+    // console.log(monsters);
     setCurrentMonster(newMonster);
+  }
+
+  function spawnMonster2() {
+    newMonster = structuredClone(
+      monsterData[Math.floor(Math.random() * monsterData.length)]
+    );
+    newMonster.baseHealth =
+      newMonster.baseHealth + Math.floor(Math.random() * newMonster.extraHealth);
+    newMonster.currentHP = newMonster.baseHealth;
+    // console.log(newMonster.sprite);
+    // console.log(monsters);
+    setTest(newMonster);
   }
   // useEffect(()=>{
   //   console.log("CHANCE",chance)
@@ -82,7 +126,7 @@ function App() {
             count: count,
             kills: kills,
             inventory: inventory,
-            setInventory: setInventory
+            setInventory: setInventory,
           }}
         >
           <TempContext.Provider
@@ -113,13 +157,13 @@ function App() {
                     path="/"
                     element={
                       <MonsterComponent
-                        spawnMonster={spawnMonster}
-                        currentMonster={currentMonster}
+                        spawnMonster={spawnMonster2}
+                        currentMonster={test}
                       />
                     }
                   />
                   <Route path="/upgrades" element={<Upgrades />} />
-                  <Route path="/bestiary" element={<Bestiary />} />
+                  <Route path="/bestiary" element={<Bestiary monsters={monsterData}/>} />
                   <Route path="/stats" element={<Statistics />} />
                 </Routes>
               </MonsterContext.Provider>

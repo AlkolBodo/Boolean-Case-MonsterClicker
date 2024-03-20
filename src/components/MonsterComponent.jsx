@@ -17,9 +17,10 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
   const { setCount, setKills, setChance, playClick, playDeath } = useContext(TempContext);
   const [health, setHealth] = useState(0);
   const [rand, setRand] = useState(0);
-  const maxHealth = currentMonster.HP;
+  const maxHealth = currentMonster.baseHealth;
   const alive = true
 
+  // console.log("c",currentMonster)
 
   // const [monsterList, setMonsterList] = useState(monsters);
   // let newMonster;
@@ -32,7 +33,7 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
   // },[])
 
   useEffect(() => {
-    setHealth(currentMonster.HP);
+    setHealth(currentMonster.baseHealth);
     // setRand(Math.floor(Math.random() * 3));
   }, [currentMonster]);
 
@@ -63,11 +64,10 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
 
       // setInventory({gold: inventory.gold+1})
       const tempInv = inventory
-      tempInv["gold"] +=1 
+      tempInv["Gold"] += currentMonster.goldDrop
       Object.keys(currentMonster.items).forEach((key) => {
         const item = currentMonster.items[key];
-        tempInv[item.name] += item.amount
-        // console.log(item.name, item.amount)
+        tempInv[item.itemName] += item.minDrop
       });
       setInventory(tempInv)
       // console.log(inventory)
@@ -88,8 +88,8 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
       <div className="monsterBox">
           <img
             className={`icon ${currentMonster.currentHP>0 ? "alive" : "dead"}`}
-            src={[currentMonster.sprite]}
-            alt="Mystery Bread"
+            src={[currentMonster.monsterSpriteUrl]}
+            alt="Loading"
             width="100%"
             height="100%"
             onClick={() => {

@@ -1,13 +1,14 @@
 import React from "react";
 
 function BestiaryItem({ monster }) {
+  console.log(monster)
   return (
     <li className="content">
-      <p>{monster.name}</p>
+      <p>{monster.monsterName}</p>
       <div className="picture">
         <img
-          src={[monster.sprite]}
-          alt="Mystery Bread"
+          src={[monster.monsterSpriteUrl]}
+          alt={monster.monsterName}
           width="100%"
           height="100%"
         />
