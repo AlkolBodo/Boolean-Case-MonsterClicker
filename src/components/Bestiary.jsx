@@ -1,22 +1,20 @@
 import React from "react";
 import { useState, createContext, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
 import "../styles/Bestiary.css";
 
-import monsters from "../data/monsters";
 import BestiaryItem from "./BestiaryItem";
 
 function Beastiary({ monsters }) {
   const [beastiaryData, setBeastiaryData] = useState([]);
-  const URL = "https://localhost:7249/monsters/";
+  const [page, setPage] = useState(1);
+  const URL = "https://localhost:7249/monsters/bestiary/15/";
   useEffect(() => {
-    fetch(URL)
+    fetch(`${URL}${(page - 1) * 15}`)
       .then((res) => {
         return res.json();
       })
       .then((data) => setBeastiaryData(data.data));
-  }, []);
-  console.log(monsters);
+  }, [page]);
   return (
     <div className="bestiary">
       <ul className="mlist">
@@ -24,6 +22,27 @@ function Beastiary({ monsters }) {
           <BestiaryItem key={index} monster={m} />
         ))}
       </ul>
+      <div className="pagination">
+        <a
+          href="#"
+          onClick={() => {
+            setPage(page === 1 ? 1 : page - 1);
+          }}
+        >
+          &laquo;
+        </a>
+        <a className="active" href="#">
+          {page}
+        </a>
+        <a
+          href="#"
+          onClick={() => {
+            setPage(page === 2 ? 2 : page + 1);
+          }}
+        >
+          &raquo;
+        </a>
+      </div>
     </div>
   );
 }
