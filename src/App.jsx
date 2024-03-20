@@ -5,9 +5,10 @@ import MonsterComponent from "./components/MonsterComponent";
 import Bestiary from "./components/Bestiary";
 import Header from "./components/Header";
 import LeftMenu from "./components/LeftMenu";
-import monsters from "./data/monsters";
 import Statistics from "./components/Statistics";
 import Upgrades from "./components/Upgrades";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 export const NavigateContext = createContext();
 export const TempContext = createContext();
@@ -18,6 +19,7 @@ function App() {
   const [currentTab, setCurrentTab] = useState("home");
   const [count, setCount] = useState(0);
   const [kills, setKills] = useState(0);
+  //const [isLoggedIn, setLoggedIn] = useState(false);
   const [test, setTest] = useState({
     monsterName: "",
     monsterSpriteUrl: "",
@@ -91,18 +93,6 @@ function App() {
     // spawnMonster();
   }, []);
 
-  function spawnMonster() {
-    newMonster = structuredClone(
-      monsters[Math.floor(Math.random() * monsters.length)]
-    );
-    newMonster.HP =
-      newMonster.HP + Math.floor(Math.random() * newMonster.randomHp);
-    newMonster.currentHP = newMonster.HP;
-    // console.log(newMonster.sprite);
-    // console.log(monsters);
-    setCurrentMonster(newMonster);
-  }
-
   function spawnMonster2() {
     newMonster = structuredClone(
       monsterData[Math.floor(Math.random() * monsterData.length)]
@@ -110,13 +100,8 @@ function App() {
     newMonster.baseHealth =
       newMonster.baseHealth + Math.floor(Math.random() * newMonster.extraHealth);
     newMonster.currentHP = newMonster.baseHealth;
-    // console.log(newMonster.sprite);
-    // console.log(monsters);
     setTest(newMonster);
   }
-  // useEffect(()=>{
-  //   console.log("CHANCE",chance)
-  // },[chance])
 
   return (
     <>
@@ -153,9 +138,11 @@ function App() {
                 }}
               >
                 <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />}></Route>
                   <Route
                     path="/"
-                    element={
+                    element={ 
                       <MonsterComponent
                         spawnMonster={spawnMonster2}
                         currentMonster={test}

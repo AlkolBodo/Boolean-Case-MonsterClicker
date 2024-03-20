@@ -1,9 +1,6 @@
 import React from "react";
 import { useState, createContext, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
 import "../styles/Bestiary.css";
-
-import monsters from "../data/monsters";
 import BestiaryItem from "./BestiaryItem";
 
 function Beastiary({ monsters }) {
