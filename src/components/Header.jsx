@@ -13,6 +13,7 @@ function Header() {
         <Route path="/" element={" Home"} />
         <Route path="/upgrades" element={" Upgrades"} />
         <Route path="/bestiary" element={" Bestiary"} />
+        <Route path="/bestiary/:id" element={" Bestiary"} />
         <Route path="/stats" element={" Stats"} />
       </Routes>
       <p>
