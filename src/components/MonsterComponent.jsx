@@ -3,22 +3,19 @@ import { useState, useContext, useEffect } from "react";
 import { TempContext } from "../App";
 import "../styles/monster.css";
 // import monsters from './../data/monsters'
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { StatisticContext } from "../App";
-
-
-
-
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
-function MonsterComponent({ currentMonster, spawnMonster}) {
+function MonsterComponent({ currentMonster, spawnMonster }) {
   const { inventory, setInventory } = useContext(StatisticContext);
-  const { setCount, setKills, setChance, playClick, playDeath } = useContext(TempContext);
+  const { setCount, setKills, setChance, playClick, playDeath } =
+    useContext(TempContext);
   const [health, setHealth] = useState(0);
   const [rand, setRand] = useState(0);
   const maxHealth = currentMonster.baseHealth;
-  const alive = true
+  const alive = true;
 
   // console.log("c",currentMonster)
 
@@ -51,27 +48,32 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
     // setChance(Math.floor(Math.random() * 10));
     // elem.style.width = (width - (count*10)) + "%";
     if (currentMonster.currentHP > 1) {
-      currentMonster.currentHP-=1
-      playClick()
+      currentMonster.currentHP -= 1;
+      playClick();
       // setHealth(health - 1);
     } else if (currentMonster.currentHP === 1) {
       // console.log("dead")
-      currentMonster.currentHP = 0
+      currentMonster.currentHP = 0;
       // setHealth(0);
       setKills((kills) => kills + 1);
-      playDeath()
+      playDeath();
       await delay(1500);
 
       // setInventory({gold: inventory.gold+1})
-      const tempInv = inventory
-      tempInv["Gold"] += currentMonster.goldDrop
+      const tempInv = inventory;
+      tempInv["Gold"] += currentMonster.goldDrop;
       Object.keys(currentMonster.items).forEach((key) => {
         const item = currentMonster.items[key];
-        tempInv[item.itemName] += item.minDrop
+        let dropchance = Math.floor(Math.random() * 100);
+        console.log(dropchance, item.dropRate);
+        if (dropchance < item.dropRate) {
+          tempInv[item.itemName] +=
+            item.minDrop + Math.floor(Math.random() * item.maxDrop);
+        }
       });
-      setInventory(tempInv)
+      setInventory(tempInv);
       // console.log(inventory)
-      spawnMonster()
+      spawnMonster();
       // setRand(Math.floor(Math.random() * 3));
       // setHealth(maxHealth);
     }
@@ -80,22 +82,30 @@ function MonsterComponent({ currentMonster, spawnMonster}) {
 
   return (
     <div className="MonsterPage">
+      <select>
+        <option value="0">Crypt</option>
+        <option value="1">Field</option>
+        <option value="2">Atlantis</option>
+      </select>
       <div className="myProgress">
-        <div id="myBar" style={{ width: (currentMonster.currentHP / health) * 100 + "%" }}>
+        <div
+          id="myBar"
+          style={{ width: (currentMonster.currentHP / health) * 100 + "%" }}
+        >
           <p className="healthText">{currentMonster.currentHP}</p>
         </div>
       </div>
       <div className="monsterBox">
-          <img
-            className={`icon ${currentMonster.currentHP>0 ? "alive" : "dead"}`}
-            src={[currentMonster.monsterSpriteUrl]}
-            alt="Loading"
-            width="100%"
-            height="100%"
-            onClick={() => {
-              clickingHim()
-            }}
-          />
+        <img
+          className={`icon ${currentMonster.currentHP > 0 ? "alive" : "dead"}`}
+          src={[currentMonster.monsterSpriteUrl]}
+          alt="Loading"
+          width="100%"
+          height="100%"
+          onClick={() => {
+            clickingHim();
+          }}
+        />
       </div>
     </div>
   );
@@ -105,5 +115,5 @@ export default MonsterComponent;
 
 MonsterComponent.propTypes = {
   currentMonster: PropTypes.object,
-  spawnMonster: PropTypes.func
-}
+  spawnMonster: PropTypes.func,
+};
