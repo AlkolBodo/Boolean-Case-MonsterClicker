@@ -10,8 +10,15 @@ const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 function MonsterComponent({ currentMonster, spawnMonster }) {
   const { inventory, setInventory } = useContext(StatisticContext);
-  const { setCount, setKills, setChance, playClick, playDeath } =
-    useContext(TempContext);
+  const {
+    setCount,
+    setKills,
+    setChance,
+    playClick,
+    playDeath,
+    setLocation,
+    location,
+  } = useContext(TempContext);
   const [health, setHealth] = useState(0);
   const [rand, setRand] = useState(0);
   const maxHealth = currentMonster.baseHealth;
@@ -79,35 +86,51 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
     }
     // console.log(health);
   }
-
+  const handleChange = (event) => {
+    const { value } = event.target;
+    console.log(value);
+    setLocation(value);
+  };
+  if (!currentMonster.monsterName) {
+    return (
+      <div className="MonsterPage">
+        <h1>Loading...</h1>
+      </div>
+    );
+  }
   return (
-    <div className="MonsterPage">
-      <select>
+    <>
+      <select onChange={handleChange} value={location}>
         <option value="0">Crypt</option>
         <option value="1">Field</option>
         <option value="2">Atlantis</option>
       </select>
-      <div className="myProgress">
-        <div
-          id="myBar"
-          style={{ width: (currentMonster.currentHP / health) * 100 + "%" }}
-        >
-          <p className="healthText">{currentMonster.currentHP}</p>
+      <div className="MonsterPage">
+        <div className="myProgress">
+          <div
+            id="myBar"
+            style={{ width: (currentMonster.currentHP / health) * 100 + "%" }}
+          >
+            <p className="healthText">{currentMonster.currentHP}</p>
+          </div>
+        </div>
+        <div className="monsterBox">
+          <img
+            className={`icon ${
+              currentMonster.currentHP > 0 ? "alive" : "dead"
+            }`}
+            src={[currentMonster.monsterSpriteUrl]}
+            alt="Loading"
+            width="100%"
+            height="100%"
+            onClick={() => {
+              clickingHim();
+            }}
+          />
         </div>
       </div>
-      <div className="monsterBox">
-        <img
-          className={`icon ${currentMonster.currentHP > 0 ? "alive" : "dead"}`}
-          src={[currentMonster.monsterSpriteUrl]}
-          alt="Loading"
-          width="100%"
-          height="100%"
-          onClick={() => {
-            clickingHim();
-          }}
-        />
-      </div>
-    </div>
+      <div className={`b${location}`}></div>
+    </>
   );
 }
 
