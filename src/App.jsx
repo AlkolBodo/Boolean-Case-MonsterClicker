@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import LeftMenu from "./components/LeftMenu";
 import Statistics from "./components/Statistics";
 import Upgrades from "./components/Upgrades";
+import BestiaryPage from "./components/BestiaryPage";
 import Login from "./components/Login";
 import Register from "./components/Register";
 
@@ -81,10 +82,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log(monsterData);
-    if(monsterData.length > 0 ){
-      spawnMonster2()
-      console.log(currentMonster)
+    // console.log(monsterData);
+    if (monsterData.length > 0) {
+      spawnMonster2();
+      // console.log(currentMonster);
     }
   }, [monsterData]);
 
@@ -98,7 +99,8 @@ function App() {
       monsterData[Math.floor(Math.random() * monsterData.length)]
     );
     newMonster.baseHealth =
-      newMonster.baseHealth + Math.floor(Math.random() * newMonster.extraHealth);
+      newMonster.baseHealth +
+      Math.floor(Math.random() * newMonster.extraHealth);
     newMonster.currentHP = newMonster.baseHealth;
     setTest(newMonster);
   }
@@ -135,6 +137,7 @@ function App() {
                 value={{
                   currentMonster: currentMonster,
                   setCurrentMonster: setCurrentMonster,
+                  monsterData: monsterData,
                 }}
               >
                 <Routes>
@@ -150,8 +153,12 @@ function App() {
                     }
                   />
                   <Route path="/upgrades" element={<Upgrades />} />
-                  <Route path="/bestiary" element={<Bestiary monsters={monsterData}/>} />
+                  <Route
+                    path="/bestiary"
+                    element={<Bestiary monsters={monsterData} />}
+                  />
                   <Route path="/stats" element={<Statistics />} />
+                  <Route path="/bestiary/:id" element={<BestiaryPage />} />
                 </Routes>
               </MonsterContext.Provider>
             </div>

@@ -1,0 +1,45 @@
+.bestiaryEntry{
+    color: black;
+    height: 100%;
+    /* padding: 10px 0; */
+    width: 60%;
+    display: grid;
+    align-content: start;
+    justify-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-row-gap: 2rem;
+    ul{
+
+        position: relative;
+    }
+    h1{
+        position: relative;
+        height: 50%;
+        text-align: center;
+        grid-column: 1 / -1;
+    }
+    img{
+        position: relative;
+        height: 100%;
+        width: auto;
+        image-rendering: pixelated;
+        /* -webkit-filter: grayscale(100%); */
+        /* filter: grayscale(100%); */
+    }
+}
+
+.parchment2 {
+    position: absolute;
+    height: 582px;
+    width: 55%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+  
+    color: #000046;
+    /* border: dashed;
+    border-color:black; */
+    box-shadow: 2px 3px 20px black, 0 0 60px #8a4d0f inset;
+    background: #fffef0;
+    filter: url(#wavy2);
+  }
