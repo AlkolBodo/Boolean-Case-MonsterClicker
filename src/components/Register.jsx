@@ -30,7 +30,7 @@ export default function Register() {
         try {
             const response = await fetch(URL, options)
             if (response.ok) {
-                navigate('/login')
+                navigate('/')
             } else {
                 console.error('Register failed:', response.status)
             }
@@ -48,6 +48,8 @@ export default function Register() {
                 <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit" className="register-button">Register</button>
             </form>
+            <h3>Are you registered?</h3>
+            <button type="submit" className="login-button" onClick={() => navigate('/')}>Login!</button>
         </div>
     )
 }

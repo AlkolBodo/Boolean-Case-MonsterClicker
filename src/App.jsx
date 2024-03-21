@@ -151,10 +151,10 @@ function App() {
                 }}
               >
                 <Routes>
-                <Route path="/login" element={<Login setUserId={setUserId}/>} />
+                <Route path="/" element={<Login setUserId={setUserId}/>} />
                 <Route path="/register" element={<Register />}></Route>
                   <Route
-                    path="/"
+                    path="/home"
                     element={
                       <MonsterComponent
                         spawnMonster={spawnMonster2}

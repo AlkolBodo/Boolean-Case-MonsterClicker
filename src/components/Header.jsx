@@ -14,7 +14,7 @@ function Header({setUserId}) {
     localStorage.removeItem('token');
     localStorage.removeItem('userid');
     setUserId(null)
-    navigate('/login')
+    navigate('/')
   }
 
   return (
