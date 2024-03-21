@@ -142,7 +142,7 @@ function App() {
                 <Route path="/register" element={<Register />}></Route>
                   <Route
                     path="/"
-                    element={ 
+                    element={
                       <MonsterComponent
                         spawnMonster={spawnMonster2}
                         currentMonster={test}

@@ -6,6 +6,12 @@ import { StatisticContext } from "../App";
 
 function Header() {
   const { inventory } = useContext(StatisticContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+}
+
   return (
     <header className="header">
       Header
@@ -20,6 +26,7 @@ function Header() {
           inventory[key] ? `${key}: ${inventory[key]} ` : ""
         ))}
       </p>
+      <button onClick={handleLogout}>Logout</button>
       {/* {inventory.gold ? <p>Gold: {inventory.gold} </p> : ""} */}
     </header>
   );
