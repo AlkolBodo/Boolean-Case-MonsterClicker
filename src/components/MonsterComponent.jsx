@@ -2,12 +2,9 @@ import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { TempContext } from "../App";
 import "../styles/monster.css";
-<<<<<<< HEAD
-import PropTypes from 'prop-types';
-=======
+
 // import monsters from './../data/monsters'
 import PropTypes from "prop-types";
->>>>>>> fc957d34a104f4737a58a443847a135bb9b6c437
 import { StatisticContext } from "../App";
 
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
@@ -37,12 +34,6 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
   async function clickingHim() {
     setCount((count) => count + 1);
     if (currentMonster.currentHP > 1) {
-<<<<<<< HEAD
-      currentMonster.currentHP -= 1
-      playClick()
-    } else if (currentMonster.currentHP === 1) {
-      currentMonster.currentHP = 0
-=======
       currentMonster.currentHP -= 1;
       playClick();
       // setHealth(health - 1);
@@ -50,19 +41,13 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
       // console.log("dead")
       currentMonster.currentHP = 0;
       // setHealth(0);
->>>>>>> fc957d34a104f4737a58a443847a135bb9b6c437
       setKills((kills) => kills + 1);
       playDeath();
       await delay(1500);
 
-<<<<<<< HEAD
-      const tempInv = inventory
-      tempInv["Gold"] += currentMonster.goldDrop
-=======
       // setInventory({gold: inventory.gold+1})
       const tempInv = inventory;
       tempInv["Gold"] += currentMonster.goldDrop;
->>>>>>> fc957d34a104f4737a58a443847a135bb9b6c437
       Object.keys(currentMonster.items).forEach((key) => {
         const item = currentMonster.items[key];
         let dropchance = Math.floor(Math.random() * 100);
@@ -72,16 +57,11 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
             item.minDrop + Math.floor(Math.random() * item.maxDrop);
         }
       });
-<<<<<<< HEAD
-      setInventory(tempInv)
-      spawnMonster()
-=======
       setInventory(tempInv);
       // console.log(inventory)
       spawnMonster();
       // setRand(Math.floor(Math.random() * 3));
       // setHealth(maxHealth);
->>>>>>> fc957d34a104f4737a58a443847a135bb9b6c437
     }
   }
   const handleChange = (event) => {

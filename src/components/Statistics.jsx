@@ -1,17 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import { useContext } from "react";
 import { StatisticContext } from "../App";
 import "../styles/Statistics.css";
 
 function Statistics() {
-<<<<<<< HEAD
-  const { count, kills } = useContext(StatisticContext);
-  const [userStatistics, setUserStatistics] = useState([]);
-  const URL = 'https://localhost:7249/users/'
-  const userid = localStorage.getItem('userid')
-=======
   const { count, kills, inventory } = useContext(StatisticContext);
->>>>>>> fc957d34a104f4737a58a443847a135bb9b6c437
   return (
     <div className="stats">
       <table>
