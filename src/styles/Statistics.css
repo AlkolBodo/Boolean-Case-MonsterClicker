@@ -5,7 +5,7 @@
     display: grid;
     justify-content: center;
     justify-items: center;
-    background-color: green;
+    background-color: peru;
 }
 table, th, td {
     border:1px solid black;
