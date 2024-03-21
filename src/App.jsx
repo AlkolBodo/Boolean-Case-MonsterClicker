@@ -67,7 +67,7 @@ function App() {
 
   // https://localhost:7249/monsters
   const [monsterData, setMonsterData] = useState([]);
-  const URL = "https://localhost:7249/monsters/stage/1";
+  const URL = "https://localhost:7249/monsters/stage/0";
   function getData() {
     fetch(URL)
       .then((res) => {
