@@ -15,7 +15,7 @@ function LeftMenu() {
           className={`item ${currentTab === "home" ? "active" : ""}`}
           onClick={() => {
             setCurrentTab("home");
-            navigate("/");
+            navigate("/home");
           }}
         >
           <div className={`parchment ${currentTab === "home" ? "active" : ""}`}></div>

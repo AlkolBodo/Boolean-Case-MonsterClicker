@@ -36,7 +36,7 @@ export default function Login({setUserId}) {
                 localStorage.setItem('token', token);
                 localStorage.setItem('userid', id)
                 setUserId(id)
-                navigate('/');
+                navigate('/home');
             } else {
                 console.error('Login failed:', response.status);
             }
@@ -54,6 +54,8 @@ export default function Login({setUserId}) {
                 <input type="text" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 <button type="submit" className="login-button" >Login</button>
             </form>
+            <h3>Are you not registered yet?</h3>
+            <button type="submit" classname="register-button" onClick={()=>navigate('/register')}>Register!</button>
         </div>
     )
 }
