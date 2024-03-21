@@ -15,11 +15,33 @@ function Beastiary({ monsters }) {
       })
       .then((data) => setBeastiaryData(data.data));
   }, [page]);
+
+  if (beastiaryData.length < 1) {
+    return (
+      <div className="bestiary">
+        <img
+        className="book"
+        src="https://i.pinimg.com/originals/e1/9c/47/e19c47506e1901acaf2de89de4f2edc5.png"
+        alt="test"
+        width="100%"
+        height="100%"
+      />
+        <h1>Loading Bestiary...</h1>
+      </div>
+    );
+  }
   return (
     <div className="bestiary">
+      <img
+        className="book"
+        src="https://i.pinimg.com/originals/e1/9c/47/e19c47506e1901acaf2de89de4f2edc5.png"
+        alt="test"
+        width="100%"
+        height="100%"
+      />
       <ul className="mlist">
         {beastiaryData.map((m, index) => (
-          <BestiaryItem key={index} monster={m} />
+          <BestiaryItem key={index} monster={m}/>
         ))}
       </ul>
       <div className="pagination">
@@ -31,9 +53,7 @@ function Beastiary({ monsters }) {
         >
           &laquo;
         </a>
-        <a className="active" href="#">
-          {page}
-        </a>
+        <a className="active">{page}</a>
         <a
           href="#"
           onClick={() => {

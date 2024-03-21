@@ -1,8 +1,10 @@
 import React from 'react'
+import "../styles/Upgrades.css";
+
 
 function Upgrades() {
   return (
-    <div>Upgrades</div>
+    <div className='upgrades'>Upgrades</div>
   )
 }
 
