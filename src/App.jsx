@@ -5,10 +5,11 @@ import MonsterComponent from "./components/MonsterComponent";
 import Bestiary from "./components/Bestiary";
 import Header from "./components/Header";
 import LeftMenu from "./components/LeftMenu";
-import monsters from "./data/monsters";
 import Statistics from "./components/Statistics";
 import Upgrades from "./components/Upgrades";
 import BestiaryPage from "./components/BestiaryPage";
+import Login from "./components/Login";
+import Register from "./components/Register";
 
 export const NavigateContext = createContext();
 export const TempContext = createContext();
@@ -16,9 +17,10 @@ export const MonsterContext = createContext();
 export const StatisticContext = createContext();
 
 function App() {
-  const [currentTab, setCurrentTab] = useState("home");
+  const [currentTab, setCurrentTab] = useState("login");
   const [count, setCount] = useState(0);
   const [kills, setKills] = useState(0);
+  //const [isLoggedIn, setLoggedIn] = useState(false);
   const [test, setTest] = useState({
     monsterName: "",
     monsterSpriteUrl: "",
@@ -76,15 +78,11 @@ function App() {
       })
       .then((data) => setMonsterData(data.data));
   }
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  
 
   useEffect(() => {
-    // console.log(monsterData);
     if (monsterData.length > 0) {
       spawnMonster2();
-      // console.log(currentMonster);
     }
   }, [monsterData]);
 
@@ -94,18 +92,6 @@ function App() {
     getData();
   }, [location]);
 
-  function spawnMonster() {
-    newMonster = structuredClone(
-      monsters[Math.floor(Math.random() * monsters.length)]
-    );
-    newMonster.HP =
-      newMonster.HP + Math.floor(Math.random() * newMonster.randomHp);
-    newMonster.currentHP = newMonster.HP;
-    // console.log(newMonster.sprite);
-    // console.log(monsters);
-    setCurrentMonster(newMonster);
-  }
-
   function spawnMonster2() {
     newMonster = structuredClone(
       monsterData[Math.floor(Math.random() * monsterData.length)]
@@ -114,13 +100,18 @@ function App() {
       newMonster.baseHealth +
       Math.floor(Math.random() * newMonster.extraHealth);
     newMonster.currentHP = newMonster.baseHealth;
-    // console.log(newMonster.sprite);
-    // console.log(monsters);
     setTest(newMonster);
   }
-  // useEffect(()=>{
-  //   console.log("CHANCE",chance)
-  // },[chance])
+
+  const [userid, setUserId] = useState(localStorage.getItem('userid' || ''))
+
+  useEffect(() => {
+    setUserId(localStorage.getItem('userid'))
+  }, [])
+
+  useEffect(() => {
+    console.log("hei")
+  }, [userid])
 
   return (
     <>
@@ -147,10 +138,10 @@ function App() {
             <NavigateContext.Provider
               value={{ currentTab: currentTab, setCurrentTab: setCurrentTab }}
             >
-              <Header />
-              <LeftMenu />
+              <Header setUserId={setUserId} />
+              {userid && <LeftMenu />}
             </NavigateContext.Provider>
-            {/* <h1>{chance > 8 ? "CLICK" : "CLICK"} HIM</h1> */}
+
             <div className="page">
               <MonsterContext.Provider
                 value={{
@@ -160,6 +151,8 @@ function App() {
                 }}
               >
                 <Routes>
+                <Route path="/login" element={<Login setUserId={setUserId}/>} />
+                <Route path="/register" element={<Register />}></Route>
                   <Route
                     path="/"
                     element={
