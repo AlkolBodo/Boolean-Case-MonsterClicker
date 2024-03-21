@@ -62,8 +62,21 @@ function App() {
   function playClick() {
     clickSound.play();
   }
-  function playDeath() {
+  async function playDeath() {
     deathSound.play();
+    ///Statistic put here
+    const id = localStorage.getItem("userid")
+    const URL = `https://localhost:7249/users/${id}/UserStats`;
+    const response = await fetch(URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({  
+        clicks: count,
+        monstersKilled: kills
+    }),
+    });
   }
   const [chance, setChance] = useState(0);
 
