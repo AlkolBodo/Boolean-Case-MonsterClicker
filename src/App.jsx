@@ -69,7 +69,8 @@ function App() {
 
   // https://localhost:7249/monsters
   const [monsterData, setMonsterData] = useState([]);
-  const URL = "https://localhost:7249/monsters/stage/1";
+  const [location, setLocation] = useState(0);
+  const URL = `https://localhost:7249/monsters/stage/${location}`;
   function getData() {
     fetch(URL)
       .then((res) => {
@@ -77,9 +78,9 @@ function App() {
       })
       .then((data) => setMonsterData(data.data));
   }
-  useEffect(() => {
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  // }, []);
 
   useEffect(() => {
     // console.log(monsterData);
@@ -91,8 +92,9 @@ function App() {
 
   let newMonster;
   useEffect(() => {
-    // spawnMonster();
-  }, []);
+    console.log(URL)
+    getData();
+  }, [location]);
 
   function spawnMonster2() {
     newMonster = structuredClone(
@@ -115,7 +117,7 @@ function App() {
             inventory: inventory,
             setInventory: setInventory,
           }}
-        >
+          >
           <TempContext.Provider
             value={{
               setCount: setCount,
@@ -123,8 +125,10 @@ function App() {
               setChance: setChance,
               playClick: playClick,
               playDeath: playDeath,
+              setLocation: setLocation,
+              location: location,
             }}
-          >
+            >
             <NavigateContext.Provider
               value={{ currentTab: currentTab, setCurrentTab: setCurrentTab }}
             >
