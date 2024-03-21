@@ -3,14 +3,18 @@ import { useState, useContext, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "../styles/Header.css";
 import { StatisticContext } from "../App";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
   const { inventory } = useContext(StatisticContext);
+  const navigate = useNavigate();
+  const isLoggedIn = localStorage.getItem('token') !== null;
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    setLoggedIn(false);
-}
+    localStorage.removeItem('userid')
+    navigate('/login')
+  }
 
   return (
     <header className="header">
@@ -22,12 +26,16 @@ function Header() {
         <Route path="/bestiary/:id" element={" Bestiary"} />
         <Route path="/stats" element={" Stats"} />
       </Routes>
+      {isLoggedIn && (
+        <button className="logout-button" onClick={handleLogout}>
+          Logout
+        </button>
+      )}
       <p>
         {Object.keys(inventory).map((key) => (
           inventory[key] ? `${key}: ${inventory[key]} ` : ""
         ))}
       </p>
-      <button onClick={handleLogout}>Logout</button>
       {/* {inventory.gold ? <p>Gold: {inventory.gold} </p> : ""} */}
     </header>
   );

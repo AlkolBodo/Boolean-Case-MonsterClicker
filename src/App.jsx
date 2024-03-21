@@ -17,7 +17,7 @@ export const MonsterContext = createContext();
 export const StatisticContext = createContext();
 
 function App() {
-  const [currentTab, setCurrentTab] = useState("home");
+  const [currentTab, setCurrentTab] = useState("login");
   const [count, setCount] = useState(0);
   const [kills, setKills] = useState(0);
   //const [isLoggedIn, setLoggedIn] = useState(false);
