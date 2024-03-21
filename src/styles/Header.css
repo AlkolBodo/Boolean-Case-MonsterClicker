@@ -28,4 +28,7 @@
     margin-right: 55px;
     justify-self: right;  
 }
+.logout-button {
+  justify-self: right;
+}
 
