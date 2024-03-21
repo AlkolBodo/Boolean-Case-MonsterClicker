@@ -60,7 +60,7 @@
   display: grid;
   justify-items: center;
   place-self: center;
-  background-color: aqua;
+  /* background-color: aqua; */
     /* grid-area: page; */
   /* padding: 2em; */
   margin: 10px;

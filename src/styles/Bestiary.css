@@ -2,36 +2,62 @@
     height: 100%;
     /* padding: 10px 0; */
     width: 60%;
-    /* display: grid; */
-    /* justify-items: center; */
-    background-color: green;
+    display: grid;
+    justify-content: center;
+    justify-items: center;
+    /* background-color: green; */
     ul{
         list-style-type: none;
+        margin: 0;
+        padding: 0;
     }
 }
-
+.book{
+    top: 80px;
+    position: absolute;
+    width: 850px;
+    height: 620px;
+    user-select: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    z-index: -1;
+}
 .mlist{
-    background-color: red;
+    height: 100%;
+    position: relative;
+    /* background-color: red; */
     display: grid;
     grid-template-columns: repeat(5, 125px);
+    /* grid-template-rows: repeat(5, 300px); */
     grid-gap: 1rem;
     justify-content: center;
     img{
-        width: 100%;
-        height: auto;
-        display: block;
+        height: 100%;
+        width: auto;
         image-rendering: pixelated;
+        user-select: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;  
     }
     .content{
-        background-color: purple;
+        border-style: dashed;
+        border-color: rgba(0,0,0,0.6);
+        /* background-color: purple; */
         display: grid;
-        grid-template-rows: 2, 125px;
+        height: 170px;
+        grid-template-rows: 1fr 2fr;
         text-align: center;
     }
 }
 
 .pagination a {
-    color: black;
+    color: white;
     float: left;
     padding: 8px 16px;
     text-decoration: none;
