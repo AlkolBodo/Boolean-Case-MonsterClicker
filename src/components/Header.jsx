@@ -5,14 +5,15 @@ import "../styles/Header.css";
 import { StatisticContext } from "../App";
 import { useNavigate } from "react-router-dom";
 
-function Header() {
+function Header({setUserId}) {
   const { inventory } = useContext(StatisticContext);
   const navigate = useNavigate();
   const isLoggedIn = localStorage.getItem('token') !== null;
 
   const handleLogout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('userid')
+    localStorage.removeItem('userid');
+    setUserId(null)
     navigate('/login')
   }
 

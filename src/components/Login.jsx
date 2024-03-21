@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 
-export default function Login() {
+export default function Login({setUserId}) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const navigate = useNavigate();
@@ -34,7 +34,8 @@ export default function Login() {
                 const { id } = await response.clone().json();
                 console.log(id)
                 localStorage.setItem('token', token);
-                localStorage.setItem('userid',  id)
+                localStorage.setItem('userid', id)
+                setUserId(id)
                 navigate('/');
             } else {
                 console.error('Login failed:', response.status);

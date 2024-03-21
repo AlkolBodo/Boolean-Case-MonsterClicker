@@ -78,15 +78,11 @@ function App() {
       })
       .then((data) => setMonsterData(data.data));
   }
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  
 
   useEffect(() => {
-    // console.log(monsterData);
     if (monsterData.length > 0) {
       spawnMonster2();
-      // console.log(currentMonster);
     }
   }, [monsterData]);
 
@@ -106,6 +102,16 @@ function App() {
     newMonster.currentHP = newMonster.baseHealth;
     setTest(newMonster);
   }
+
+  const [userid, setUserId] = useState(localStorage.getItem('userid' || ''))
+
+  useEffect(() => {
+    setUserId(localStorage.getItem('userid'))
+  }, [])
+
+  useEffect(() => {
+    console.log("hei")
+  }, [userid])
 
   return (
     <>
@@ -132,10 +138,10 @@ function App() {
             <NavigateContext.Provider
               value={{ currentTab: currentTab, setCurrentTab: setCurrentTab }}
             >
-              <Header />
-              <LeftMenu />
+              <Header setUserId={setUserId} />
+              {userid && <LeftMenu />}
             </NavigateContext.Provider>
-            {/* <h1>{chance > 8 ? "CLICK" : "CLICK"} HIM</h1> */}
+
             <div className="page">
               <MonsterContext.Provider
                 value={{
@@ -145,7 +151,7 @@ function App() {
                 }}
               >
                 <Routes>
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login setUserId={setUserId}/>} />
                 <Route path="/register" element={<Register />}></Route>
                   <Route
                     path="/"

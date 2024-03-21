@@ -1,11 +1,13 @@
 import { useState } from "react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
 
     const [email, setEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const navigate = useNavigate();
 
     const URL = 'https://localhost:7249/apiuser/register'
     const data = {
@@ -28,7 +30,7 @@ export default function Register() {
         try {
             const response = await fetch(URL, options)
             if (response.ok) {
-
+                navigate('/login')
             } else {
                 console.error('Register failed:', response.status)
             }

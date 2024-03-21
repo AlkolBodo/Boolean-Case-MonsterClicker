@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { NavigateContext } from "../App";
@@ -6,11 +6,12 @@ import { NavigateContext } from "../App";
 function LeftMenu() {
   const { currentTab, setCurrentTab } = useContext(NavigateContext);
   const navigate = useNavigate();
+
+
   return (
     <nav className="left-menu">
       <ul className="inbox-list">
         <li
-          
           className={`item ${currentTab === "home" ? "active" : ""}`}
           onClick={() => {
             setCurrentTab("home");
