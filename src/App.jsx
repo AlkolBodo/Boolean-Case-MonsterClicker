@@ -62,9 +62,26 @@ function App() {
   function playClick() {
     clickSound.play();
   }
-  function playDeath() {
+  async function playDeath() {
     deathSound.play();
+    ///Statistic put here
   }
+
+  useEffect(()=> {
+    if(!(kills < 1)){
+    const id = localStorage.getItem("userid")
+    const URL = `https://localhost:7249/users/${id}/UserStats`;
+    const response = fetch(URL, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({  
+        clicks: count,
+        monstersKilled: kills
+    }),
+    })};
+  }, [kills])
   const [chance, setChance] = useState(0);
 
   // https://localhost:7249/monsters
@@ -104,6 +121,18 @@ function App() {
   }
 
   const [userid, setUserId] = useState(localStorage.getItem('userid' || ''))
+  useEffect(() => {console.log(userid)},[userid])
+
+  useEffect(() => {
+    if(userid !== null && userid !== undefined){
+      var newData
+    fetch(`https://localhost:7249/users/${userid}/UserStats`)
+    .then((res) => {
+      return res.json();
+    })
+    .then((data) => {setKills(data.data.monstersKilled)
+    setCount(data.data.clicks)});
+  }}, [userid])
 
   useEffect(() => {
     setUserId(localStorage.getItem('userid'))
