@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { Navigate } from "react-router-dom";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import PropTypes from 'prop-types'
+Login.propTypes = {
+    setUserId: PropTypes.func
+}
 
 export default function Login({setUserId}) {
     const [email, setEmail] = useState('');
@@ -10,10 +12,6 @@ export default function Login({setUserId}) {
 
 
     const URL = 'https://localhost:7249/apiuser/login'
-    const data = {
-        email: email,
-        password: password,
-    };
     const options = {
         method: 'POST',
         headers: {

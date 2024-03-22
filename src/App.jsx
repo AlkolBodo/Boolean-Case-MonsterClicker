@@ -21,7 +21,7 @@ function App() {
   const [count, setCount] = useState(0);
   const [kills, setKills] = useState(0);
   //const [isLoggedIn, setLoggedIn] = useState(false);
-  const [test, setTest] = useState({
+  const [currentMonster, setCurrentMonster] = useState({
     monsterName: "",
     monsterSpriteUrl: "",
     baseHealth: 0,
@@ -30,14 +30,6 @@ function App() {
     location: 0,
     currentHP: 0,
     items: [],
-  });
-  const [currentMonster, setCurrentMonster] = useState({
-    id: 2,
-    name: "",
-    HP: 0,
-    randomHp: 0,
-    sprite: "",
-    currentHP: 0,
   });
   const [inventory, setInventory] = useState({
     Gold: 0,
@@ -82,9 +74,7 @@ function App() {
     }),
     })};
   }, [kills])
-  const [chance, setChance] = useState(0);
 
-  // https://localhost:7249/monsters
   const [monsterData, setMonsterData] = useState([]);
   const [location, setLocation] = useState(0);
   const URL = `https://localhost:7249/monsters/stage/${location}`;
@@ -117,7 +107,7 @@ function App() {
       newMonster.baseHealth +
       Math.floor(Math.random() * newMonster.extraHealth);
     newMonster.currentHP = newMonster.baseHealth;
-    setTest(newMonster);
+    setCurrentMonster(newMonster);
   }
 
   const [userid, setUserId] = useState(localStorage.getItem('userid' || ''))
@@ -138,10 +128,6 @@ function App() {
     setUserId(localStorage.getItem('userid'))
   }, [])
 
-  useEffect(() => {
-    console.log("hei")
-  }, [userid])
-
   return (
     <>
       <div className="app">
@@ -157,7 +143,6 @@ function App() {
             value={{
               setCount: setCount,
               setKills: setKills,
-              setChance: setChance,
               playClick: playClick,
               playDeath: playDeath,
               setLocation: setLocation,
@@ -174,8 +159,6 @@ function App() {
             <div className="page">
               <MonsterContext.Provider
                 value={{
-                  currentMonster: currentMonster,
-                  setCurrentMonster: setCurrentMonster,
                   monsterData: monsterData,
                 }}
               >
@@ -187,14 +170,14 @@ function App() {
                     element={
                       <MonsterComponent
                         spawnMonster={spawnMonster2}
-                        currentMonster={test}
+                        currentMonster={currentMonster}
                       />
                     }
                   />
                   <Route path="/upgrades" element={<Upgrades />} />
                   <Route
                     path="/bestiary"
-                    element={<Bestiary monsters={monsterData} />}
+                    element={<Bestiary/>}
                   />
                   <Route path="/stats" element={<Statistics />} />
                   <Route path="/bestiary/:id" element={<BestiaryPage />} />

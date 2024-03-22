@@ -1,9 +1,12 @@
-import React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
 import "../styles/Header.css";
 import { StatisticContext } from "../App";
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types'
+Header.propTypes = {
+  setUserId: PropTypes.func
+}
 
 function Header({setUserId}) {
   const { inventory } = useContext(StatisticContext);
@@ -37,7 +40,6 @@ function Header({setUserId}) {
           inventory[key] ? `${key}: ${inventory[key]} ` : ""
         ))}
       </p>
-      {/* {inventory.gold ? <p>Gold: {inventory.gold} </p> : ""} */}
     </header>
   );
 }

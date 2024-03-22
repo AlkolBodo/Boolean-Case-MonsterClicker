@@ -1,5 +1,4 @@
 import { useState } from "react";
-import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
@@ -10,11 +9,6 @@ export default function Register() {
     const navigate = useNavigate();
 
     const URL = 'https://localhost:7249/apiuser/register'
-    const data = {
-        email: email,
-        username: username,
-        password: password,
-    };
     const options = {
         method: 'POST',
         headers: {

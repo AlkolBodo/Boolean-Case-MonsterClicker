@@ -1,10 +1,9 @@
-import React from "react";
-import { useState, createContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import "../styles/Bestiary.css";
 
 import BestiaryItem from "./BestiaryItem";
 
-function Beastiary({ monsters }) {
+function Beastiary() {
   const [beastiaryData, setBeastiaryData] = useState([]);
   const [page, setPage] = useState(1);
   const URL = "https://localhost:7249/monsters/bestiary/15/";

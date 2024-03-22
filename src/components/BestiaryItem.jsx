@@ -1,5 +1,8 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
+import PropTypes from 'prop-types'
+BestiaryItem.propTypes = {
+  monster: PropTypes.object
+}
 
 function BestiaryItem({ monster }) {
   const navigate = useNavigate();
@@ -19,3 +22,4 @@ function BestiaryItem({ monster }) {
 }
 
 export default BestiaryItem;
+

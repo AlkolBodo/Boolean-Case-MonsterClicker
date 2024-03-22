@@ -1,4 +1,3 @@
-import React from "react";
 import { useState, useContext, useEffect } from "react";
 import { TempContext } from "../App";
 import "../styles/monster.css";
@@ -14,16 +13,12 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
   const {
     setCount,
     setKills,
-    setChance,
     playClick,
     playDeath,
     setLocation,
     location,
   } = useContext(TempContext);
   const [health, setHealth] = useState(0);
-  const [rand, setRand] = useState(0);
-  const maxHealth = currentMonster.baseHealth;
-  const alive = true;
 
  
   useEffect(() => {
@@ -36,16 +31,12 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
     if (currentMonster.currentHP > 1) {
       currentMonster.currentHP -= 1;
       playClick();
-      // setHealth(health - 1);
     } else if (currentMonster.currentHP === 1) {
-      // console.log("dead")
       currentMonster.currentHP = 0;
-      // setHealth(0);
       setKills((kills) => kills + 1);
       playDeath();
       await delay(1500);
 
-      // setInventory({gold: inventory.gold+1})
       const tempInv = inventory;
       tempInv["Gold"] += currentMonster.goldDrop;
       Object.keys(currentMonster.items).forEach((key) => {
@@ -58,10 +49,7 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
         }
       });
       setInventory(tempInv);
-      // console.log(inventory)
       spawnMonster();
-      // setRand(Math.floor(Math.random() * 3));
-      // setHealth(maxHealth);
     }
   }
   const handleChange = (event) => {

@@ -1,7 +1,5 @@
-import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { MonsterContext } from "../App";
 import "../styles/BestiaryPage.css";
 
 function BestiaryPage() {

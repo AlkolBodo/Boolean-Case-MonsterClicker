@@ -1,4 +1,3 @@
-import React from "react";
 import { useContext } from "react";
 import { StatisticContext } from "../App";
 import "../styles/Statistics.css";
@@ -24,8 +23,6 @@ function Statistics() {
           <th>Kills</th>
           <td>{kills}</td>
         </tr>
-      {/* </table>
-      <table> */}
         <tr>
           <th>Gold</th>
           <td>{inventory.Gold}</td>
