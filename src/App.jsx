@@ -70,7 +70,8 @@ function App() {
       },
       body: JSON.stringify({  
         clicks: count,
-        monstersKilled: kills
+        monstersKilled: kills,
+        gold: inventory.Gold
     }),
     })};
   }, [kills])
@@ -115,13 +116,15 @@ function App() {
 
   useEffect(() => {
     if(userid !== null && userid !== undefined){
-      var newData
+    
     fetch(`https://localhost:7249/users/${userid}/UserStats`)
     .then((res) => {
       return res.json();
     })
     .then((data) => {setKills(data.data.monstersKilled)
-    setCount(data.data.clicks)});
+    setCount(data.data.clicks)
+    setInventory({...inventory, Gold: data.data.gold})
+  });
   }}, [userid])
 
   useEffect(() => {

@@ -35,7 +35,6 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
       currentMonster.currentHP = 0;
       setKills((kills) => kills + 1);
       playDeath();
-      await delay(1500);
 
       const tempInv = inventory;
       tempInv["Gold"] += currentMonster.goldDrop;
@@ -48,6 +47,7 @@ function MonsterComponent({ currentMonster, spawnMonster }) {
             item.minDrop + Math.floor(Math.random() * item.maxDrop);
         }
       });
+      await delay(1500);
       setInventory(tempInv);
       spawnMonster();
     }
