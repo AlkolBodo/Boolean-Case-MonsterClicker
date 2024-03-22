@@ -55,7 +55,7 @@ export default function Login({setUserId}) {
                 <button type="submit" className="login-button" >Login</button>
             </form>
             <h3>Are you not registered yet?</h3>
-            <button type="submit" classname="register-button" onClick={()=>navigate('/register')}>Register!</button>
+            <button type="submit" className="register-button" onClick={()=>navigate('/register')}>Register!</button>
         </div>
     )
 }
